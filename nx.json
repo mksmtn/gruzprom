@@ -40,8 +40,8 @@
     "sharedGlobals": []
   },
   "workspaceLayout": {
-    "appsDir": "packages",
-    "libsDir": "packages"
+    "appsDir": "packages/apps",
+    "libsDir": "packages/libs"
   },
   "generators": {
     "@nrwl/angular:application": {

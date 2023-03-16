@@ -3,7 +3,7 @@ export default {
   displayName: 'b2b-ui',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/b2b-ui',
+  coverageDirectory: '../../coverage/packages/apps/b2b-ui',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
