@@ -4,10 +4,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    RouterModule,
-  ],
-  selector: 'gruzprom-root',
+  imports: [RouterModule],
+  selector: 'b2b-ui-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })

@@ -9,7 +9,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "gruzprom",
+            "prefix": "b2b-ui",
             "style": "camelCase"
           }
         ],
@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "gruzprom",
+            "prefix": "b2b-ui",
             "style": "kebab-case"
           }
         ]
