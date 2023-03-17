@@ -19,7 +19,10 @@
           "packages/apps/b2b-ui/src/favicon.ico",
           "packages/apps/b2b-ui/src/assets"
         ],
-        "styles": ["packages/apps/b2b-ui/src/styles.sass", "node_modules/@clr/ui/clr-ui.min.css"],
+        "styles": [
+          "packages/apps/b2b-ui/src/styles.sass",
+          "node_modules/@clr/ui/clr-ui.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -89,6 +92,12 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
       }
     }
   },

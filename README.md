@@ -15,3 +15,21 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Protocol for creating a new project
+
+1. Add `version` Nx target to `project.json`:
+
+```bash
+npx nx g @jscutlery/semver:install
+```
+
+## Release protocol
+
+We use the [semver](https://github.com/jscutlery/semver) Nx plugin
+
+```bash
+npx run my-project:version [...options]
+
+npx affected --target version [..options]
+```

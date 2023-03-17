@@ -23,6 +23,12 @@
       "options": {
         "lintFilePatterns": ["packages/apps/b2b-ui-e2e/**/*.{js,ts}"]
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "preset": "conventional"
+      }
     }
   },
   "tags": [],
