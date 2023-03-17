@@ -4,14 +4,24 @@
     <div class="clr-row">
       <div class="clr-col"></div>
       <div class="clr-col-10 clr-col-md-6 clr-col-xl-4">
-        <form (ngSubmit)="onSubmit()">
-          <div>
-            <input placeholder="Login" type="text" />
-          </div>
-          <div>
-            <input placeholder="Password" type="password" />
-          </div>
-          <button type="submit">Войти</button>
+        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" clrForm>
+          <clr-input-container>
+            <label>Login</label>
+            <input clrInput [formControl]="loginControl" type="text" />
+          </clr-input-container>
+          <clr-input-container>
+            <label>Password</label>
+            <input clrInput [formControl]="passwordControl" type="password" />
+          </clr-input-container>
+          <button
+            [clrLoading]="submitBtnState$ | async"
+            [disabled]="formGroup.invalid"
+            class="btn btn-primary btn-sm"
+            style="margin-top: 24px"
+            type="submit"
+          >
+            Войти
+          </button>
         </form>
       </div>
       <div class="clr-col"></div>
