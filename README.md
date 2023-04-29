@@ -1,6 +1,6 @@
 # Gruzprom
 
-An app for a moving company. This project is a monorepo created with [Nx](https://nx.dev). See [Wiki](./wiki) for more info.
+An app for a moving company. This project is a monorepo created with [Nx](https://nx.dev). See [Wiki](https://github.com/mksmtn/gruzprom/wiki) for more info.
 
 ## Understand this workspace
 
