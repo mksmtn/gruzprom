@@ -29,7 +29,7 @@ npx nx g @jscutlery/semver:install
 We use the [semver](https://github.com/jscutlery/semver) Nx plugin
 
 ```bash
-npx run my-project:version [...options]
+npx nx run my-project:version [...options]
 
-npx affected --target version [..options]
+npx nx affected --target version [..options]
 ```
