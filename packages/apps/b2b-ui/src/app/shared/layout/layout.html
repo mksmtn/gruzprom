@@ -1,8 +1,20 @@
-<div class="main-container">
+<clr-main-container>
   <div *ngIf="false" class="alert alert-app-level">...</div>
-  <header class="header header-6">[B2B UI] Gruzprom</header>
+  <clr-header class="header header-6">
+    <div class="branding">
+      <a [routerLink]="['/']" class="nav-link">
+        <span class="title"> [B2B UI] Gruzprom </span>
+      </a>
+    </div>
+    <div class="header-nav" [clr-nav-level]="1">
+      <a [routerLink]="['/', 'new']" class="nav-link">New order</a>
+      <a [routerLink]="['/', 'list']" class="nav-link">My orders</a>
+    </div>
+  </clr-header>
   <div class="content-container">
-    <div class="content-area"></div>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
     <clr-vertical-nav></clr-vertical-nav>
   </div>
-</div>
+</clr-main-container>
