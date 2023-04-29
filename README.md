@@ -11,7 +11,7 @@ Run `nx graph` to see a diagram of the dependencies of the projects.
 1. Add `version` Nx target to `project.json`:
 
 ```bash
-npx nx g @jscutlery/semver:install
+nx g @jscutlery/semver:install
 ```
 
 ## Release protocol
@@ -19,7 +19,7 @@ npx nx g @jscutlery/semver:install
 We use the [semver](https://github.com/jscutlery/semver) Nx plugin
 
 ```bash
-npx nx run my-project:version [...options]
+nx run my-project:version [...options]
 
-npx nx affected --target version [..options]
+nx affected --target version [..options]
 ```

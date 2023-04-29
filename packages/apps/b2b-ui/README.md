@@ -3,5 +3,5 @@
 ## Starting local development server
 
 ```bash
-npx nx serve b2b-ui
+nx serve b2b-ui
 ```
