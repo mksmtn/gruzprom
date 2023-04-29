@@ -1,30 +1,53 @@
-<div class="main-container">
-  <header class="header header-6">[B2B UI] Gruzprom</header>
-  <div style="margin-top: 10%">
-    <div class="clr-row">
-      <div class="clr-col"></div>
-      <div class="clr-col-10 clr-col-md-6 clr-col-xl-4">
-        <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" clrForm>
-          <clr-input-container>
-            <label>Login</label>
-            <input clrInput [formControl]="loginControl" type="text" />
-          </clr-input-container>
-          <clr-input-container>
-            <label>Password</label>
-            <input clrInput [formControl]="passwordControl" type="password" />
-          </clr-input-container>
-          <button
-            [clrLoading]="submitBtnState$ | async"
-            [disabled]="formGroup.invalid"
-            class="btn btn-primary btn-sm"
-            style="margin-top: 24px"
-            type="submit"
-          >
-            Войти
-          </button>
-        </form>
+<div class="login-wrapper">
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" clrForm class="login">
+    <section class="title">
+      <h3 class="welcome">Добро пожаловать в</h3>
+      Укротители Тяжестей
+      <h5 class="hint">Введите выданные вам имя пользователя и пароль</h5>
+    </section>
+    <div class="login-group">
+      <clr-input-container>
+        <label class="clr-sr-only">Имя пользователя</label>
+        <input
+          [formControl]="usernameControl"
+          type="text"
+          autocomplete="username"
+          name="username"
+          clrInput
+          placeholder="Имя пользователя"
+        />
+      </clr-input-container>
+      <clr-password-container>
+        <label class="clr-sr-only">Пароль</label>
+        <input
+          [formControl]="passwordControl"
+          type="password"
+          autocomplete="current-password"
+          name="password"
+          clrPassword
+          placeholder="Пароль"
+        />
+      </clr-password-container>
+      <clr-checkbox-wrapper>
+        <label>Запомнить пользователя</label>
+        <input
+          [formControl]="rememberMeControl"
+          type="checkbox"
+          name="rememberMe"
+          clrCheckbox
+        />
+      </clr-checkbox-wrapper>
+      <div *ngIf="invalidCredentials$ | async" class="error active">
+        Неверное имя пользователя или пароль
       </div>
-      <div class="clr-col"></div>
+      <button
+        [clrLoading]="submitBtnState$ | async"
+        [disabled]="formGroup.invalid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Войти
+      </button>
     </div>
-  </div>
+  </form>
 </div>

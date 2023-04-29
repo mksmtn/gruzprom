@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ClarityModule, ClrLoadingState } from '@clr/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -22,7 +22,7 @@ export class SignInComponent {
     ClrLoadingState.DEFAULT
   );
 
-  protected readonly loginControl = new FormControl('', [
+  protected readonly usernameControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
   ]);
@@ -32,10 +32,15 @@ export class SignInComponent {
     Validators.minLength(5),
   ]);
 
+  protected readonly rememberMeControl = new FormControl(false);
+
   protected readonly formGroup = new FormGroup({
-    login: this.loginControl,
+    username: this.usernameControl,
     password: this.passwordControl,
+    rememberMe: this.rememberMeControl,
   });
+
+  protected readonly invalidCredentials$ = of(true);
 
   constructor(private readonly router: Router) {}
 
