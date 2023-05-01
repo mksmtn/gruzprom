@@ -8,7 +8,7 @@
 >
   <formly-form
     [form]="formGroup"
-    [fields]="fields"
+    [fields]="(fields$ | async)!"
     [model]="model"
   ></formly-form>
   <div class="mt-2">
