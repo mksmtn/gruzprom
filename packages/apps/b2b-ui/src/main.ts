@@ -8,12 +8,13 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { FormlyModule } from '@ngx-formly/core';
 
-const rootReducers = {};
+import { allClarityFormlyTypes } from '@gruzprom/ng-formly-clarity';
 
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
-import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+
+const rootReducers = {};
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -21,6 +22,10 @@ bootstrapApplication(AppComponent, {
     provideStore(rootReducers),
     provideEffects([]),
     provideAnimations(),
-    importProvidersFrom(FormlyModule.forRoot(), FormlyBootstrapModule),
+    importProvidersFrom(
+      FormlyModule.forRoot({
+        types: allClarityFormlyTypes,
+      })
+    ),
   ],
 }).catch((err) => console.error(err));

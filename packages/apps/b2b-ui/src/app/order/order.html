@@ -1,8 +1,23 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+<h2>Новый заказ</h2>
+
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="formGroup"
+  clrForm
+  clrLayout="horizontal"
+>
   <formly-form
     [form]="formGroup"
     [fields]="fields"
     [model]="model"
   ></formly-form>
-  <button type="submit" class="btn btn-primary">Заказать</button>
+  <div class="mt-2">
+    <button
+      [disabled]="formGroup.invalid"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Создать
+    </button>
+  </div>
 </form>
