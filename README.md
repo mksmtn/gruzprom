@@ -10,6 +10,14 @@ This repository uses a [Development Container](https://containers.dev/), which a
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
 
+## Running tests
+
+```bash
+npm run test
+```
+
+Note: Clarity Design lib is packaged incorrectly, so it [breaks](https://stackoverflow.com/questions/74860112/problem-importing-clarity-components-in-jest-unit-tests) Jest. See example how to solve it in [b2b-ui jest config](./packages/apps/b2b-ui/jest.config.ts).
+
 ## Protocol for creating a new project
 
 1. Generate a new project (e.g. an Angular lib):
