@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+
+node_modules/git-format-staged/git-format-staged -f 'node ./node_modules/prettier/bin-prettier.js --ignore-unknown --stdin-filepath "{}"' '*'
