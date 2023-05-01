@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
+import { PredefinedValuesComponent } from '@gruzprom/ng-formly-clarity';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { distinctUntilChanged, interval, map, startWith } from 'rxjs';
+
+const millisecondsInOneDay = 1000 * 60 * 60 * 24;
 
 @Component({
   standalone: true,
@@ -11,16 +15,41 @@ import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
   imports: [FormlyModule, ReactiveFormsModule, ClarityModule],
 })
 export class OrderComponent {
+  protected readonly datePredefinedValues$ = interval(1000 * 60).pipe(
+    startWith(-1),
+    map(() => new Date().toISOString().slice(0, 10)),
+    distinctUntilChanged(),
+    map(() => [
+      {
+        value: new Date().toISOString().slice(0, 10),
+        label: 'Сегодня',
+      },
+      {
+        value: new Date(Date.now() + millisecondsInOneDay)
+          .toISOString()
+          .slice(0, 10),
+        label: 'Завтра',
+      },
+      {
+        value: new Date(Date.now() + millisecondsInOneDay * 2)
+          .toISOString()
+          .slice(0, 10),
+        label: 'Послезавтра',
+      },
+    ])
+  );
   protected readonly formGroup = new FormGroup({});
   protected readonly model = {};
   protected readonly fields: FormlyFieldConfig[] = [
     {
       key: 'date',
       type: 'input',
+      wrappers: [PredefinedValuesComponent],
       props: {
         label: 'Дата',
         type: 'date',
         required: true,
+        predefinedValues: this.datePredefinedValues$,
       },
     },
     {
