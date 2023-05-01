@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { FieldArrayType, FormlyModule } from '@ngx-formly/core';
 
 @Component({
@@ -8,11 +8,8 @@ import { FieldArrayType, FormlyModule } from '@ngx-formly/core';
   templateUrl: './repeat.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormlyModule],
-  styles: [
-    `
-    :host
-      display: block
-    `,
-  ],
 })
-export class RepeatComponent extends FieldArrayType {}
+export class RepeatComponent extends FieldArrayType {
+  @HostBinding('class')
+  readonly ngClass = ['block'];
+}

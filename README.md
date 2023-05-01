@@ -23,10 +23,14 @@ Note: Clarity Design lib is packaged incorrectly, so it [breaks](https://stackov
 1. Generate a new project (e.g. an Angular lib):
 
 ```bash
-nx g @nrwl/angular:lib my-lib --changeDetection OnPush --inlineStyle true --prefix m-l --standalone true
+nx g @nx/angular:lib my-lib --changeDetection OnPush --inlineStyle true --prefix m-l --standalone true
+
+nx g @nx/angular:app my-app --changeDetection OnPush --inlineStyle true --prefix m-a --standalone true --add-tailwind
 ```
 
 2. Add `version` Nx target to `project.json` (copy-paste from another project)
+
+3. Configure `tailwind.config.js` in your new project to use the [existing preset](./packages/libs/tailwind-preset/tailwind.config.js), e.g. [in b2b-ui](./packages/apps/b2b-ui/tailwind.config.js)
 
 ## Release protocol
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
 import {
@@ -20,15 +20,12 @@ interface FormlyFieldConfigWithPredefinedValues extends FormlyFieldConfig {
   selector: 'clr-formly-predefined-values',
   templateUrl: './predefined-values.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-    :host
-      display: block
-    `,
-  ],
   imports: [CommonModule, ClarityModule, FormlySelectModule],
 })
 export class PredefinedValuesComponent extends FieldWrapper<FormlyFieldConfigWithPredefinedValues> {
+  @HostBinding('class')
+  readonly ngClass = ['block'];
+
   protected setValue(value: FormlySelectOption): void {
     this.field.formControl?.setValue(value.value);
   }

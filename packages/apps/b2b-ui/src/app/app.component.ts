@@ -7,6 +7,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [RouterModule],
   selector: 'b2b-ui-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {}

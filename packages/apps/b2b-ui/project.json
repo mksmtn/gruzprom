@@ -14,14 +14,15 @@
         "main": "packages/apps/b2b-ui/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "packages/apps/b2b-ui/tsconfig.app.json",
-        "inlineStyleLanguage": "sass",
+        "inlineStyleLanguage": "css",
         "assets": [
           "packages/apps/b2b-ui/src/favicon.ico",
           "packages/apps/b2b-ui/src/assets"
         ],
         "styles": [
-          "packages/apps/b2b-ui/src/styles.sass",
-          "node_modules/@clr/ui/clr-ui.min.css"
+          "node_modules/modern-normalize/modern-normalize.css",
+          "node_modules/@clr/ui/clr-ui.min.css",
+          "packages/apps/b2b-ui/src/styles.css"
         ],
         "scripts": []
       },
@@ -71,7 +72,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
@@ -81,7 +82,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "packages/apps/b2b-ui/jest.config.ts",

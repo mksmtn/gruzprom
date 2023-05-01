@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
@@ -17,11 +17,8 @@ import { FormlySelectModule } from '@ngx-formly/core/select';
     FormlyModule,
     FormlySelectModule,
   ],
-  styles: [
-    `
-    :host
-      display: block 
-    `,
-  ],
 })
-export class SelectComponent extends FieldType<FieldTypeConfig> {}
+export class SelectComponent extends FieldType<FieldTypeConfig> {
+  @HostBinding('class')
+  readonly ngClass = ['block'];
+}
