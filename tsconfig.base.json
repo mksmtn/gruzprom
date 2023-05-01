@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@gruzprom/ng-formly-clarity": [
+        "packages/libs/ng-formly-clarity/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

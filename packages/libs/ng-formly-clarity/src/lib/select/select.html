@@ -1,0 +1,10 @@
+<clr-select-container
+  *ngIf="props['options'] | formlySelectOptions : field | async as options"
+>
+  <label *ngIf="props['label']">{{ props['label'] }}</label>
+  <select clrSelect [formControl]="formControl" [formlyAttributes]="field">
+    <option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+</clr-select-container>

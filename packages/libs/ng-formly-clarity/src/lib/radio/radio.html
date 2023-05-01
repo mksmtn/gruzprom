@@ -1,0 +1,19 @@
+<clr-radio-container>
+  <label *ngIf="props['label']">{{ props['label'] }}</label>
+  <clr-radio-wrapper
+    *ngFor="let option of props['options'] | formlySelectOptions : field | async; index as i"
+    [id]="id + '_' + i"
+  >
+    <input
+      clrRadio
+      [formControl]="formControl"
+      [formlyAttributes]="field"
+      [value]="option.value"
+      [name]="field.name || id"
+      [required]="props['required'] ?? false"
+      [tabindex]="props['tabindex'] ?? null"
+      type="radio"
+    />
+    <label>{{ option.label }}</label>
+  </clr-radio-wrapper>
+</clr-radio-container>

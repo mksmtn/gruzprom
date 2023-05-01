@@ -1,0 +1,20 @@
+<div>
+  <legend *ngIf="props['label']" class="clr-control-label">
+    {{ props['label'] }}
+  </legend>
+  <p *ngIf="props['description']">{{ props['description'] }}</p>
+
+  <div *ngFor="let field of field.fieldGroup; let i = index" class="clr-row">
+    <formly-field [field]="field" class="clr-col"></formly-field>
+    <div class="clr-col-2">
+      <button (click)="remove(i)" class="btn btn-danger btn-sm" type="button">
+        x
+      </button>
+    </div>
+  </div>
+  <div>
+    <button (click)="add()" class="btn btn-primary btn-sm" type="button">
+      {{ props['addText'] }}
+    </button>
+  </div>
+</div>

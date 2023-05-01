@@ -1,0 +1,31 @@
+<clr-input-container>
+  <label *ngIf="props['label']" [for]="id">{{ props['label'] }}</label>
+  <input
+    *ngIf="props['type'] !== 'number'; else numberTmp"
+    clrInput
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    [id]="id"
+    [type]="props['type'] ?? 'text'"
+    [placeholder]="props['placeholder'] ?? null"
+    [autocomplete]="props['autocomplete'] ?? null"
+    [tabindex]="props['tabindex'] ?? null"
+    [placeholder]="props['placeholder'] ?? null"
+    [name]="props['name'] ?? null"
+  />
+  <!-- Having statically available type="number" makes Angular formControl receive numbers instead of strings -->
+  <ng-template #numberTmp>
+    <input
+      clrInput
+      [formControl]="formControl"
+      [formlyAttributes]="field"
+      [id]="id"
+      [placeholder]="props['label'] ?? null"
+      [autocomplete]="props['autocomplete'] ?? null"
+      [tabindex]="props['tabindex'] ?? null"
+      [placeholder]="props['placeholder'] ?? null"
+      [name]="props['name'] ?? null"
+      type="number"
+    />
+  </ng-template>
+</clr-input-container>
