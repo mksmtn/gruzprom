@@ -1,5 +1,2 @@
-export { InputComponent } from './lib/input/input';
-export {
-  allClarityFormlyComponents,
-  allClarityFormlyTypes,
-} from './lib/all-components';
+export { PredefinedValuesComponent } from './lib/predefined-values/predefined-values';
+export { allClarityFormlyTypes } from './lib/all-components';

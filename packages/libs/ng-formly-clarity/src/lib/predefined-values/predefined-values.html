@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <ng-container #fieldComponent></ng-container>
+  </div>
+  <clr-button-group
+    *ngIf="props['predefinedValues'] | formlySelectOptions : field | async as values"
+    class="btn-sm"
+  >
+    <clr-button
+      *ngFor="let value of values"
+      (click)="setValue(value)"
+      class="btn"
+      type="button"
+      >{{ value.label }}</clr-button
+    >
+  </clr-button-group>
+</div>

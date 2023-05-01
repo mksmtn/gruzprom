@@ -3,12 +3,6 @@ import { RadioComponent } from './radio/radio';
 import { RepeatComponent } from './repeat/repeat';
 import { SelectComponent } from './select/select';
 
-export const allClarityFormlyComponents = [
-  InputComponent,
-  RadioComponent,
-  RepeatComponent,
-];
-
 export const allClarityFormlyTypes = [
   {
     name: 'input',
