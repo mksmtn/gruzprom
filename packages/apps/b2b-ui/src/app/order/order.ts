@@ -6,13 +6,20 @@ import { Observable, combineLatest, map } from 'rxjs';
 import { TodayService } from '../shared/providers/today.service';
 import { createFormlyFields } from './formly-fields';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   standalone: true,
   selector: 'b2b-ui-order',
   templateUrl: './order.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormlyModule, ReactiveFormsModule, ClarityModule],
+  imports: [
+    CommonModule,
+    FormlyModule,
+    ReactiveFormsModule,
+    ClarityModule,
+    HttpClientModule,
+  ],
 })
 export class OrderComponent {
   protected readonly formGroup = new FormGroup({});
@@ -21,9 +28,14 @@ export class OrderComponent {
     this.todayService.dayChanges(),
   ]).pipe(map(([today]) => createFormlyFields({ today })));
 
-  constructor(private readonly todayService: TodayService) {}
+  constructor(
+    private readonly todayService: TodayService,
+    private readonly httpClient: HttpClient
+  ) {}
 
   protected onSubmit(): void {
-    console.log(this.model);
+    this.httpClient
+      .post('/api/orders', { data: this.model })
+      .subscribe({ next: console.log, error: console.error });
   }
 }

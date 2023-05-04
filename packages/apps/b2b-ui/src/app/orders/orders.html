@@ -1,1 +1,3 @@
-orders work
+<h2>Заказы</h2>
+
+<p *ngFor="let order of orders$ | async">{{ order | json }}</p>
