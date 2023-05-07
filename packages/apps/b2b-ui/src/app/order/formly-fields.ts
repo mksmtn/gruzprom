@@ -32,116 +32,136 @@ export const createFormlyFields = ({
   today: string;
 }): FormlyFieldConfig[] => [
   {
-    key: 'date',
-    type: 'input',
-    wrappers: [PredefinedValuesComponent],
-    props: {
-      label: 'Дата',
-      type: 'date',
-      required: true,
-      predefinedValues: createPredefinedDates(today),
-      // https://github.com/ngx-formly/ngx-formly/issues/3663
-      min: today as unknown as number,
-    },
-  },
-  {
-    key: 'time',
-    type: 'input',
-    props: {
-      label: 'Время',
-      type: 'time',
-      required: true,
-    },
-  },
-  {
-    key: 'address',
-    type: 'input',
-    props: {
-      label: 'Адрес',
-      required: true,
-    },
-  },
-  {
-    key: 'contacts',
-    type: 'input',
-    props: {
-      label: 'Контакты',
-      required: true,
-    },
-  },
-  {
-    key: 'moverCount',
-    type: 'input',
-    props: {
-      label: 'Кол-во грузчиков (опционально)',
-      type: 'number',
-      required: false,
-    },
-  },
-  {
-    key: 'comment',
-    type: 'input',
-    props: {
-      label: 'Комментарий (опционально)',
-      required: false,
-    },
-  },
-  {
-    key: 'paymentType',
-    type: 'radio',
-    defaultValue: 'cashless',
-    props: {
-      label: 'Тип оплаты',
-      options: [
-        {
-          label: 'Безнал',
-          value: 'cashless',
+    type: 'stepper',
+    fieldGroup: [
+      {
+        props: {
+          label: 'Основная информация',
+          description: 'Обязательно к заполнению',
         },
-        {
-          label: 'Наличными',
-          value: 'cash',
-        },
-      ],
-    },
-  },
-  {
-    key: 'vehicles',
-    type: 'repeat',
-    props: {
-      addText: 'Добавить машину',
-      label: 'Транспорт',
-      description: 'Если требуется автотранспорт, добавьте машины тут',
-    },
-    fieldArray: {
-      type: 'select',
-      defaultValue: null,
-      props: {
-        placeholder: 'Тип',
-        options: [
+        className: 'block mb-4',
+        fieldGroup: [
           {
-            label: 'Не знаю тип',
-            value: null,
+            key: 'date',
+            type: 'input',
+            wrappers: [PredefinedValuesComponent],
+            props: {
+              label: 'Дата',
+              type: 'date',
+              required: true,
+              predefinedValues: createPredefinedDates(today),
+              // https://github.com/ngx-formly/ngx-formly/issues/3663
+              min: today as unknown as number,
+            },
           },
           {
-            label: 'Малая газель',
-            value: 'small',
+            key: 'time',
+            type: 'input',
+            props: {
+              label: 'Время',
+              type: 'time',
+              required: true,
+            },
           },
           {
-            label: 'Большая газель',
-            value: 'bigger',
+            key: 'address',
+            type: 'input',
+            props: {
+              label: 'Адрес',
+              required: true,
+            },
           },
           {
-            label: 'Фура',
-            value: 'truck',
+            key: 'contacts',
+            type: 'input',
+            props: {
+              label: 'Контакты',
+              required: true,
+            },
+          },
+          {
+            key: 'paymentType',
+            type: 'radio',
+            defaultValue: 'cashless',
+            props: {
+              label: 'Тип оплаты',
+              options: [
+                {
+                  label: 'Безнал',
+                  value: 'cashless',
+                },
+                {
+                  label: 'Наличными',
+                  value: 'cash',
+                },
+              ],
+            },
           },
         ],
       },
-      expressions: {
-        'props.label': (field: FormlyFieldConfig) =>
-          typeof field.key === 'string'
-            ? `Машина №${parseInt(field.key, 10) + 1}`
-            : undefined,
+      {
+        props: { label: 'Детали', description: 'Опционально' },
+        fieldGroup: [
+          {
+            key: 'comment',
+            type: 'input',
+            props: {
+              label: 'Комментарий',
+              required: false,
+            },
+          },
+          {
+            key: 'moverCount',
+            type: 'input',
+            className: 'block mb-3',
+            props: {
+              label: 'Кол-во грузчиков',
+              type: 'number',
+              required: false,
+            },
+          },
+          {
+            key: 'vehicles',
+            type: 'repeat',
+            props: {
+              addText: 'Добавить машину',
+              label: 'Транспорт',
+              description: 'Если требуется автотранспорт, добавьте машины тут',
+            },
+            fieldArray: {
+              type: 'select',
+              defaultValue: null,
+              props: {
+                placeholder: 'Тип',
+                options: [
+                  {
+                    label: 'Не знаю тип',
+                    value: null,
+                  },
+                  {
+                    label: 'Малая газель',
+                    value: 'small',
+                  },
+                  {
+                    label: 'Большая газель',
+                    value: 'bigger',
+                  },
+                  {
+                    label: 'Фура',
+                    value: 'truck',
+                  },
+                ],
+              },
+              expressions: {
+                'props.label': (field: FormlyFieldConfig) =>
+                  typeof field.key === 'string'
+                    ? `Машина №${parseInt(field.key, 10) + 1}`
+                    : undefined,
+              },
+            },
+          },
+        ],
       },
-    },
+    ],
   },
 ];
