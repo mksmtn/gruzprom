@@ -1,0 +1,7 @@
+<div *ngFor="let step of field.fieldGroup">
+  <div class="flex items-center">
+    <h3 *ngIf="step.props?.label as label" class="!m-0 pe-2">{{ label }}</h3>
+    <span *ngIf="step.props?.description as d">{{ d }}</span>
+  </div>
+  <formly-field [field]="step"></formly-field>
+</div>
