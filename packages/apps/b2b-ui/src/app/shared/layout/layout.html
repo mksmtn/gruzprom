@@ -3,12 +3,20 @@
   <clr-header class="header header-6">
     <div class="branding">
       <a [routerLink]="['/']" class="nav-link">
-        <span class="title"> [B2B UI] Gruzprom </span>
+        <span class="title">[B2B UI] Gruzprom</span>
       </a>
     </div>
     <div class="header-nav" [clr-nav-level]="1">
-      <a [routerLink]="['/', 'new']" class="nav-link">New order</a>
-      <a [routerLink]="['/', 'list']" class="nav-link">My orders</a>
+      <a [routerLink]="['/', 'new']" routerLinkActive="active" class="nav-link">
+        Новый заказ
+      </a>
+      <a
+        [routerLink]="['/', 'list']"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Список заказов
+      </a>
     </div>
   </clr-header>
   <div class="content-container">
