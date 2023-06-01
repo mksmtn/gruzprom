@@ -1,0 +1,15 @@
+<h2>Список заказов</h2>
+
+<p *ngIf="!(orders$ | async)?.length">Пока пусто</p>
+
+<clr-datagrid *ngIf="orders$ | async as orders">
+  <clr-dg-column>Дата</clr-dg-column>
+  <clr-dg-column>Время</clr-dg-column>
+  <clr-dg-column>Адресс</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let order of $any(orders)">
+    <clr-dg-cell>{{ order.date | date }}</clr-dg-cell>
+    <clr-dg-cell>{{ order.time }}</clr-dg-cell>
+    <clr-dg-cell>{{ order.address }}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>

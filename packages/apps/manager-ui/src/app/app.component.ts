@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { OrdersComponent } from './orders/orders';
+import { OrdersComponent } from './orders';
 
 @Component({
   standalone: true,

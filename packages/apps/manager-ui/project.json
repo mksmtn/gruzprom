@@ -19,7 +19,11 @@
           "packages/apps/manager-ui/src/favicon.ico",
           "packages/apps/manager-ui/src/assets"
         ],
-        "styles": ["packages/apps/manager-ui/src/styles.css"],
+        "styles": [
+          "node_modules/modern-normalize/modern-normalize.css",
+          "node_modules/@clr/ui/clr-ui.min.css",
+          "packages/apps/manager-ui/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -59,7 +63,10 @@
           "browserTarget": "manager-ui:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "packages/apps/manager-ui/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
