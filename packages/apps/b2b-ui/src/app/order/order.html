@@ -7,17 +7,36 @@
   clrLayout="horizontal"
 >
   <formly-form
+    (modelChange)="onModelChange()"
     [form]="formGroup"
     [fields]="(fields$ | async)!"
     [model]="model"
+    [options]="options"
   ></formly-form>
-  <div class="mt-2">
+  <div class="mt-2 flex">
     <button
       [disabled]="formGroup.invalid"
+      [clrLoading]="loading$ | async"
       type="submit"
-      class="btn btn-primary"
+      class="btn btn-primary me-3"
     >
       Создать
     </button>
+    <clr-alert
+      *ngIf="(loading$ | async) === LoadingState.SUCCESS"
+      clrAlertType="success"
+    >
+      <clr-alert-item>
+        <span class="alert-text whitespace-nowrap">Заказ создан</span>
+      </clr-alert-item>
+    </clr-alert>
+    <clr-alert
+      *ngIf="(loading$ | async) === LoadingState.ERROR"
+      clrAlertType="danger"
+    >
+      <clr-alert-item>
+        <span class="alert-text whitespace-nowrap">Произошла ошибка</span>
+      </clr-alert-item>
+    </clr-alert>
   </div>
 </form>
