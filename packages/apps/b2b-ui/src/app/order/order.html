@@ -30,13 +30,23 @@
         <span class="alert-text whitespace-nowrap">Заказ создан</span>
       </clr-alert-item>
     </clr-alert>
-    <clr-alert
-      *ngIf="(loading$ | async) === LoadingState.ERROR"
-      clrAlertType="danger"
+    <clr-modal
+      (clrModalOpenChange)="onErrorModalChange($event)"
+      [clrModalOpen]="(loading$ | async) === LoadingState.ERROR"
     >
-      <clr-alert-item>
-        <span class="alert-text whitespace-nowrap">Произошла ошибка</span>
-      </clr-alert-item>
-    </clr-alert>
+      <h3 class="modal-title">Ошибка сохранения</h3>
+      <div
+        *ngIf="errorMessages$ | async as messages"
+        [ngSwitch]="messages.length === 1"
+        class="modal-body"
+      >
+        <ng-container *ngSwitchCase="true">
+          <p *ngFor="let error of messages" class="!mt-0">{{ error }}</p>
+        </ng-container>
+        <ul *ngSwitchDefault>
+          <li *ngFor="let error of messages">- {{ error }}</li>
+        </ul>
+      </div>
+    </clr-modal>
   </div>
 </form>

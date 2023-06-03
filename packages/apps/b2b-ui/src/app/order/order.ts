@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule, ClrLoadingState } from '@clr/angular';
 import {
@@ -35,12 +39,20 @@ export class OrderComponent {
   ]).pipe(map(([today]) => createFormlyFields({ today })));
   protected readonly loading$ = new BehaviorSubject(ClrLoadingState.DEFAULT);
   protected readonly LoadingState = ClrLoadingState;
+  protected readonly errorMessages$ = new BehaviorSubject<string[]>([]);
   private isNextChangeDueToReset = false;
 
   constructor(
     private readonly todayService: TodayService,
     private readonly httpClient: HttpClient
   ) {}
+
+  protected onErrorModalChange(open: boolean): void {
+    if (!open) {
+      this.loading$.next(ClrLoadingState.DEFAULT);
+      this.errorMessages$.next([]);
+    }
+  }
 
   protected onModelChange(): void {
     if (
@@ -69,6 +81,20 @@ export class OrderComponent {
       error: (err) => {
         console.error(err);
         this.loading$.next(ClrLoadingState.ERROR);
+        if (
+          err instanceof HttpErrorResponse &&
+          typeof err.error === 'object' &&
+          'message' in err.error
+        ) {
+          const message = err.error.message as unknown;
+          if (typeof message === 'string') {
+            this.errorMessages$.next([message]);
+          } else if (Array.isArray(message)) {
+            this.errorMessages$.next(
+              message.filter((m) => typeof m === 'string')
+            );
+          }
+        }
       },
     });
   }
