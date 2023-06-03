@@ -37,8 +37,10 @@ export class OrdersController {
 
   @Post()
   async createOrder(@Body('data') order: CreateOrderRequest) {
-    const data = await this.commandBus.execute(new CreateOrderCommand(order));
-    return { data };
+    const customer = {
+      id: 'todo',
+    };
+    await this.commandBus.execute(new CreateOrderCommand(order, customer));
   }
 
   @Get()

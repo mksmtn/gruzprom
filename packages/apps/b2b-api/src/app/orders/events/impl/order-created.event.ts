@@ -1,5 +1,5 @@
-import { Order } from '../../dtos/order';
+import { OrderEntity } from '../../domain/order.entity';
 
 export class OrderCreatedEvent {
-  constructor(public readonly order: Order) {}
+  constructor(public readonly order: OrderEntity) {}
 }

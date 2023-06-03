@@ -8,20 +8,27 @@ import { eventHandlers } from './events/handlers';
 import { OrderProducer } from './adapters/order.producer';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { REDIS } from './adapters/tokens';
+import { ConfigModule } from '@nestjs/config';
+import { RedisConfig, redisConfig } from '../app-config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { OrderModel, OrderSchema } from './repositories/order.schema';
 
 @Module({
   imports: [
     CqrsModule,
-    ClientsModule.register([
+    ConfigModule,
+    ClientsModule.registerAsync([
       {
         name: REDIS,
-        transport: Transport.REDIS,
-        options: {
-          host: 'localhost',
-          port: 6379,
-        },
+        imports: [ConfigModule.forFeature(redisConfig)],
+        inject: [redisConfig.KEY],
+        useFactory: (options: RedisConfig) => ({
+          transport: Transport.REDIS,
+          options,
+        }),
       },
     ]),
+    MongooseModule.forFeature([{ name: OrderModel.name, schema: OrderSchema }]),
   ],
   controllers: [OrdersController],
   providers: [
