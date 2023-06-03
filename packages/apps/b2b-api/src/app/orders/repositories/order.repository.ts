@@ -18,4 +18,8 @@ export class OrderRepository {
   async list(): Promise<Order[]> {
     return this.orders;
   }
+
+  async findById(id: string): Promise<Order | undefined> {
+    return this.orders.find((o) => o.id === id);
+  }
 }

@@ -4,18 +4,32 @@ import { OrdersController } from './orders.controller';
 import { commandHandlers } from './commands/handlers';
 import { queryHandlers } from './queries/handlers';
 import { OrderRepository } from './repositories/order.repository';
-import { PubSubService } from './services/pub-sub.service';
 import { eventHandlers } from './events/handlers';
+import { OrderProducer } from './adapters/order.producer';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { REDIS } from './adapters/tokens';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [
+    CqrsModule,
+    ClientsModule.register([
+      {
+        name: REDIS,
+        transport: Transport.REDIS,
+        options: {
+          host: 'localhost',
+          port: 6379,
+        },
+      },
+    ]),
+  ],
   controllers: [OrdersController],
   providers: [
     ...commandHandlers,
     ...queryHandlers,
     ...eventHandlers,
     OrderRepository,
-    PubSubService,
+    OrderProducer,
   ],
 })
 export class OrdersModule {}

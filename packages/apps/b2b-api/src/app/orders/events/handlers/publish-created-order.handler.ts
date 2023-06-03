@@ -1,14 +1,14 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { OrderCreatedEvent } from '../impl/order-created.event';
-import { PubSubService } from '../../services/pub-sub.service';
+import { OrderProducer } from '../../adapters/order.producer';
 
 @EventsHandler(OrderCreatedEvent)
 export class PublishCreatedOrderHandler
   implements IEventHandler<OrderCreatedEvent>
 {
-  constructor(private readonly pubSub: PubSubService) {}
+  constructor(private readonly orderProducer: OrderProducer) {}
 
   handle(event: OrderCreatedEvent) {
-    this.pubSub.receiveNewOrder(event.order);
+    return this.orderProducer.sendOrderCreatedMessage(event.order.id);
   }
 }
