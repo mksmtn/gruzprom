@@ -1,4 +1,4 @@
-export interface Customer {
+export interface CustomerDto {
   id: string;
   defaultMoverPrice?: number;
 }

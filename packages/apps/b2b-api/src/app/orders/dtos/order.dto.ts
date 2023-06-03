@@ -1,12 +1,8 @@
+import { OrderDto as Dto } from '@gruzprom/api';
 import { OrderEntity } from '../domain/order.entity';
-import { CreateOrderRequest } from './create-order';
 
-export interface OrderDto extends CreateOrderRequest {
-  customerId: string;
-}
-
-export const OrderDto = {
-  fromEntity(entity: OrderEntity): OrderDto {
+export class OrderDto extends Dto {
+  static fromEntity(entity: OrderEntity): Dto {
     return {
       id: entity.id,
       date: entity.date,
@@ -17,6 +13,8 @@ export const OrderDto = {
       moverCount: entity.moverCount,
       moverPrice: entity.moverPrice,
       customerId: entity.customer.id,
+      paymentType: entity.paymentType,
+      vehicles: entity.vehicles,
     };
-  },
-};
+  }
+}

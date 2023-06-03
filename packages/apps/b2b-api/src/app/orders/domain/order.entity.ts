@@ -52,6 +52,14 @@ export class OrderEntity {
     return this.props.comment;
   }
 
+  get paymentType() {
+    return this.props.paymentType;
+  }
+
+  get vehicles() {
+    return this.props.vehicles;
+  }
+
   get moverPrice() {
     return this.props.moverPrice;
   }

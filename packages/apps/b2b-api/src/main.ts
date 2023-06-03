@@ -13,7 +13,7 @@ import { RedisConfig, redisConfig } from './app/app-config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   const redisOptions = app.get<RedisConfig>(redisConfig.KEY);
   app.connectMicroservice<RedisOptions>({
     transport: Transport.REDIS,

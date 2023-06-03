@@ -8,12 +8,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateOrderCommand } from './commands/impl/create-order.command';
-import { CreateOrderRequest } from './dtos/create-order';
+import { EventPattern, Payload } from '@nestjs/microservices';
+import { CreateOrderByCustomerRequest } from '@gruzprom/api';
+import { CreateOrderByCustomerCommand } from './commands/impl/create-order-by-customer.command';
 import { ListOrdersQuery } from './queries/impl/list-orders.query';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { GetOrderQuery } from './queries/impl/get-order.query';
-import { EventPattern, Payload } from '@nestjs/microservices';
 import { redisOrderCreatedChannelName } from './adapters/redis-channels';
 
 @Controller('orders')
@@ -36,11 +36,13 @@ export class OrdersController {
   }
 
   @Post()
-  async createOrder(@Body('data') order: CreateOrderRequest) {
+  async createOrder(@Body('data') order: CreateOrderByCustomerRequest) {
     const customer = {
       id: 'todo',
     };
-    await this.commandBus.execute(new CreateOrderCommand(order, customer));
+    await this.commandBus.execute(
+      new CreateOrderByCustomerCommand(order, customer)
+    );
   }
 
   @Get()

@@ -6,10 +6,14 @@
   <clr-dg-column>Дата</clr-dg-column>
   <clr-dg-column>Время</clr-dg-column>
   <clr-dg-column>Адресс</clr-dg-column>
+  <clr-dg-column>Кол-во грузчиков</clr-dg-column>
+  <clr-dg-column>Машины</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let order of $any(orders)">
     <clr-dg-cell>{{ order.date | date }}</clr-dg-cell>
     <clr-dg-cell>{{ order.time }}</clr-dg-cell>
     <clr-dg-cell>{{ order.address }}</clr-dg-cell>
+    <clr-dg-cell>{{ order.moverCount }}</clr-dg-cell>
+    <clr-dg-cell>{{ order.vehicles | map:joinVehicles }}</clr-dg-cell>
   </clr-dg-row>
 </clr-datagrid>

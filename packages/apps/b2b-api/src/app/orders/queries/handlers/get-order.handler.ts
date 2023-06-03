@@ -1,10 +1,10 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import * as Option from 'fp-ts/Option';
 import * as E from 'fp-ts/Either';
+import { OrderDto } from '../../dtos';
 import { GetOrderQuery } from '../impl/get-order.query';
 import { OrderRepository } from '../../repositories/order.repository';
-import { OrderDto } from '../../dtos/order';
-import { InternalServerErrorException } from '@nestjs/common';
 
 @QueryHandler(GetOrderQuery)
 export class GetOrderHandler implements IQueryHandler<GetOrderQuery> {

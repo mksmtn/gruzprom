@@ -1,3 +1,4 @@
+import { PaymentType, VehicleType } from '@gruzprom/api';
 import { PredefinedValuesComponent } from '@gruzprom/ng-formly-clarity';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
@@ -82,17 +83,17 @@ export const createFormlyFields = ({
           {
             key: 'paymentType',
             type: 'radio',
-            defaultValue: 'cashless',
+            defaultValue: PaymentType.Cashless,
             props: {
               label: 'Тип оплаты',
               options: [
                 {
                   label: 'Безнал',
-                  value: 'cashless',
+                  value: PaymentType.Cashless,
                 },
                 {
                   label: 'Наличными',
-                  value: 'cash',
+                  value: PaymentType.Cash,
                 },
               ],
             },
@@ -130,25 +131,25 @@ export const createFormlyFields = ({
             },
             fieldArray: {
               type: 'select',
-              defaultValue: null,
+              defaultValue: VehicleType.Unknown,
               props: {
                 placeholder: 'Тип',
                 options: [
                   {
                     label: 'Не знаю тип',
-                    value: null,
+                    value: VehicleType.Unknown,
                   },
                   {
                     label: 'Малая газель',
-                    value: 'small',
+                    value: VehicleType.SmallVan,
                   },
                   {
                     label: 'Большая газель',
-                    value: 'bigger',
+                    value: VehicleType.BiggerVan,
                   },
                   {
                     label: 'Фура',
-                    value: 'truck',
+                    value: VehicleType.Truck,
                   },
                 ],
               },

@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@gruzprom/angular-extra": ["packages/libs/angular-extra/src/index.ts"],
+      "@gruzprom/api": ["packages/libs/api/src/index.ts"],
       "@gruzprom/ng-formly-clarity": [
         "packages/libs/ng-formly-clarity/src/index.ts"
       ]

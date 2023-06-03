@@ -6,18 +6,26 @@ import {
   OnInit,
 } from '@angular/core';
 import { Subject, Subscription, fromEvent } from 'rxjs';
-import { Order } from '../../dtos/order';
 import { ClarityModule } from '@clr/angular';
+import { MapPipe } from '@gruzprom/angular-extra';
+import { OrderDto, VehicleType } from '@gruzprom/api';
+
+const vehicleNameMap: { [key in VehicleType]: string } = {
+  [VehicleType.Unknown]: 'Неизвестно',
+  [VehicleType.SmallVan]: 'Малая газель',
+  [VehicleType.BiggerVan]: 'Большая газель',
+  [VehicleType.Truck]: 'Фура',
+};
 
 @Component({
   standalone: true,
   selector: 'manager-ui-orders',
   templateUrl: './orders.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ClarityModule],
+  imports: [CommonModule, ClarityModule, MapPipe],
 })
 export class OrdersComponent implements OnInit, OnDestroy {
-  protected readonly orders$ = new Subject<ReadonlyArray<Order>>();
+  protected readonly orders$ = new Subject<ReadonlyArray<OrderDto>>();
   private eventSource?: EventSource;
   private readonly sub = new Subscription();
 
@@ -36,4 +44,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.eventSource?.close();
     this.sub.unsubscribe();
   }
+
+  protected readonly joinVehicles = (vehicles: ReadonlyArray<VehicleType>) =>
+    vehicles.map((v) => vehicleNameMap[v]).join(', ');
 }

@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule, ClrLoadingState } from '@clr/angular';
 import {
@@ -7,10 +9,9 @@ import {
   FormlyModule,
 } from '@ngx-formly/core';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { CreateOrderByCustomerRequest } from '@gruzprom/api';
 import { TodayService } from '../shared/providers/today.service';
 import { createFormlyFields } from './formly-fields';
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -27,7 +28,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class OrderComponent {
   protected readonly formGroup = new FormGroup({});
-  protected readonly model = {};
+  protected readonly model = {} as Omit<CreateOrderByCustomerRequest, 'id'>;
   protected readonly options: FormlyFormOptions = {};
   protected readonly fields$: Observable<FormlyFieldConfig[]> = combineLatest([
     this.todayService.dayChanges(),
@@ -55,7 +56,11 @@ export class OrderComponent {
 
   protected onSubmit(): void {
     this.loading$.next(ClrLoadingState.LOADING);
-    this.httpClient.post('/api/orders', { data: this.model }).subscribe({
+    const data: CreateOrderByCustomerRequest = {
+      ...this.model,
+      id: crypto.randomUUID(),
+    };
+    this.httpClient.post('/api/orders', { data }).subscribe({
       next: () => {
         this.isNextChangeDueToReset = true;
         this.options.resetModel?.();
