@@ -1,0 +1,25 @@
+# https://github.com/devcontainers/templates/blob/main/src/javascript-node-mongo/.devcontainer/docker-compose.yml
+
+version: '3.8'
+services:
+  redis:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    command: redis-server
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    environment:
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      REDIS_HOST: redis
+      REDIS_PORT: 6379

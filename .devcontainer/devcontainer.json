@@ -1,10 +1,11 @@
 {
   "name": "Node.js",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "postCreateCommand": "npm i",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",
+  "postCreateCommand": "npm i",
+  "shutdownAction": "stopCompose",
   "customizations": {
     "vscode": {
       "extensions": [
