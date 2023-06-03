@@ -6,7 +6,7 @@ describe('createFormlyFields', () => {
     const dateFieldConfig = config[0].fieldGroup?.[0]?.fieldGroup?.find(
       ({ key }) => key === 'date'
     );
-    expect(dateFieldConfig?.props?.min).toEqual('2023-05-01');
+    expect(dateFieldConfig?.props?.attributes?.['min']).toEqual('2023-05-01');
   });
 
   it('should provide correct predefined dates', () => {

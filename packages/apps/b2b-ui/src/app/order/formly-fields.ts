@@ -51,8 +51,9 @@ export const createFormlyFields = ({
               type: 'date',
               required: true,
               predefinedValues: createPredefinedDates(today),
-              // https://github.com/ngx-formly/ngx-formly/issues/3663
-              min: today as unknown as number,
+              attributes: {
+                min: today,
+              },
             },
           },
           {
@@ -70,6 +71,7 @@ export const createFormlyFields = ({
             props: {
               label: 'Адрес',
               required: true,
+              minLength: 3,
             },
           },
           {
@@ -78,6 +80,7 @@ export const createFormlyFields = ({
             props: {
               label: 'Контакты',
               required: true,
+              minLength: 3,
             },
           },
           {
@@ -119,6 +122,8 @@ export const createFormlyFields = ({
               label: 'Кол-во грузчиков',
               type: 'number',
               required: false,
+              min: 0,
+              max: 99,
             },
           },
           {
