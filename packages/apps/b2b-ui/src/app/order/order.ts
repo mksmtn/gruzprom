@@ -10,7 +10,7 @@ import {
 } from '@ngx-formly/core';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { CreateOrderByCustomerRequest } from '@gruzprom/api';
-import { TodayService } from '../shared/providers/today.service';
+import { TodayService } from '@gruzprom/angular-extra';
 import { createFormlyFields } from './formly-fields';
 
 @Component({
