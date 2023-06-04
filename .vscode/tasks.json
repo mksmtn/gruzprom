@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "serve",
+      "dependsOrder": "parallel",
+      "dependsOn": ["b2b-api", "b2b-ui", "manager-ui"]
+    },
+    {
+      "label": "b2b-api",
+      "type": "shell",
+      "command": "nx serve b2b-api",
+      "presentation": {
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "b2b-ui",
+      "type": "shell",
+      "command": "nx serve b2b-ui",
+      "presentation": {
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "manager-ui",
+      "type": "shell",
+      "command": "nx serve manager-ui --port 4201",
+      "presentation": {
+        "panel": "dedicated"
+      }
+    }
+  ]
+}
