@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RedisConfig, redisConfig } from '../app-config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrderModel, OrderSchema } from './repositories/order.schema';
+import { NestjsLoggerModule } from '@gruzprom/nestjs-logger';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { OrderModel, OrderSchema } from './repositories/order.schema';
       },
     ]),
     MongooseModule.forFeature([{ name: OrderModel.name, schema: OrderSchema }]),
+    NestjsLoggerModule,
   ],
   controllers: [OrdersController],
   providers: [

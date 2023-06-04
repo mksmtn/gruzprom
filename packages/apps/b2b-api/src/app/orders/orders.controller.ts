@@ -6,15 +6,20 @@ import {
   Sse,
   MessageEvent,
   NotFoundException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { EventPattern, Payload, RpcException } from '@nestjs/microservices';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import * as TE from 'fp-ts/TaskEither';
 import { CreateOrderByCustomerRequest } from '@gruzprom/api';
+import { LoggerService } from '@gruzprom/nestjs-logger';
+import { TaskEitherInterceptor } from '@gruzprom/nestjs-fp';
 import { CreateOrderByCustomerCommand } from './commands/impl/create-order-by-customer.command';
 import { ListOrdersQuery } from './queries/impl/list-orders.query';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { GetOrderQuery } from './queries/impl/get-order.query';
 import { redisOrderCreatedChannelName } from './adapters/redis-channels';
+import { pipe } from 'fp-ts/lib/function';
 
 @Controller('orders')
 export class OrdersController {
@@ -22,7 +27,8 @@ export class OrdersController {
 
   constructor(
     private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus
+    private readonly queryBus: QueryBus,
+    private readonly logger: LoggerService
   ) {}
 
   @Sse('sse')
@@ -31,8 +37,12 @@ export class OrdersController {
   }
 
   @EventPattern(redisOrderCreatedChannelName())
-  async consumeOrder(@Payload() orderId: string) {
-    this.orders$.next([...this.orders$.value, orderId]);
+  @UseInterceptors(TaskEitherInterceptor)
+  consumeOrder(@Payload() orderId: string): TE.TaskEither<RpcException, void> {
+    return pipe(
+      TE.of(this.orders$.next([...this.orders$.value, orderId])),
+      TE.tapIO(() => this.logger.debug('Received an new order: ' + orderId))
+    );
   }
 
   @Post()

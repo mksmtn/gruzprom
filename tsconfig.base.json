@@ -17,6 +17,8 @@
     "paths": {
       "@gruzprom/angular-extra": ["packages/libs/angular-extra/src/index.ts"],
       "@gruzprom/api": ["packages/libs/api/src/index.ts"],
+      "@gruzprom/nestjs-fp": ["packages/libs/nestjs-fp/src/index.ts"],
+      "@gruzprom/nestjs-logger": ["packages/libs/nestjs-logger/src/index.ts"],
       "@gruzprom/ng-formly-clarity": [
         "packages/libs/ng-formly-clarity/src/index.ts"
       ]

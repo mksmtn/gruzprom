@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { OrdersModule } from './orders/orders.module';
 import { MongoConfig, mongoConfig, redisConfig } from './app-config';
 import { HealthModule } from './health/health.module';
+import { NestjsLoggerModule } from '@gruzprom/nestjs-logger';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { HealthModule } from './health/health.module';
         uri: `mongodb://${config.host}:${config.port}`,
       }),
     }),
+    NestjsLoggerModule,
 
     // App
     OrdersModule,
